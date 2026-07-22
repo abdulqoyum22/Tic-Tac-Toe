@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic-Tac-Toe</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>TIC TAC TOE</h1>
+            <p class="subtitle">For Fun</p>
+        </header>
+
+        <div class="top-panel">
+            <section class="card setup-card">
+                <h2>Game Setup</h2>
+
+                <input id="player-one-name" type="text" placeholder="Player One Name">
+                <input id="player-two-name" type="text" placeholder="Player Two Name">
+                <input id="rounds" type="number" min="1" placeholder="Number of Rounds">
+                
+                <button id="start">Start Match</button>
+            </section>
+
+
+            <section class="card match-card">
+                <h2>Match Info</h2>
+
+                <div class="info-block">
+                    <span class="label">Round</span>
+                    <p id="round">Round 1</p>
+                </div>
+
+                <div class="info-block">
+                    <span class="label">Current Turn</span>
+                    <p id="turn">Waiting to Start...</p>
+                </div>
+
+                <div class="info-block">
+                    <span class="label">Scoreboard</span>
+                    <p id="score"></p>
+                </div>
+
+                <div class="info-block">
+                    <span class="label">Status</span>
+                    <p id="message"></p>
+                </div>
+            </section>
+        </div>
+
+        <section class="board-section">
+            <div class="board">
+                <button data-index="0"></button>
+                <button data-index="1"></button>
+                <button data-index="2"></button>
+
+                <button data-index="3"></button>
+                <button data-index="4"></button>
+                <button data-index="5"></button>
+
+                <button data-index="6"></button>
+                <button data-index="7"></button>
+                <button data-index="8"></button>
+            </div>
+        </section>
+        
+        <section class="controls">
+            <button id="next-round">Next Round</button>
+
+            <button id="restart">Restart</button>
+        </section>
+        
+       
+        
+        
+        
+        
+        
+        
+        
+        
+    </div>
+</body>
+</html>
