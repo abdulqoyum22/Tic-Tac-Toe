@@ -138,18 +138,26 @@ const gameController = (() => {
         activePlayerIndex = 0;
         isGameOver = false;
     };
+
+    function resetMatch() {
+        players = [];
+        currentRound = 1;
+        totalRounds = 0;
+        gameStarted = false;
+        resetGame();
+    };
     
     function getPlayers() {
         return players;
     };
     function nextRound() {
-        currentRound++;
-        
-        if (currentRound <= totalRounds) {
-            resetGame();
-            return true;
+        if (currentRound >= totalRounds) {
+            return false;
         }
-        return false;
+
+        currentRound++;
+        resetGame();
+        return true;
     };
     
     function getCurrentRound() {
@@ -171,10 +179,12 @@ const gameController = (() => {
         startGame,
         playMove,
         resetGame,
+        resetMatch,
         nextRound,
         getMatchWinner,
         getPlayers,
-        getCurrentRound
+        getCurrentRound,
+        getCurrentPlayer
     };
 })();
 
@@ -216,15 +226,25 @@ const displayController = (() => {
     
 
     restartBtn.addEventListener("click", () => {
-        gameController.resetGame();
+        gameController.resetMatch();
+        playerOneInput.value = "";
+        playerTwoInput.value = "";
+        roundsInput.value = "";
         displayController.render();
         updateMessage("");
-        turn.textContent = "";
-        updateScore();
+        turn.textContent = "Waiting to Start...";
+        round.textContent = "Round 1";
+        score.textContent = "";
+        nextRoundBtn.style.display = "none";
     });
 
     function updateTurn() {
         const player = gameController.getCurrentPlayer();
+
+        if (!player) {
+            turn.textContent = "Waiting to Start...";
+            return;
+        }
 
         turn.textContent = `${player.name}'s turn (${player.marker})`;
     };
@@ -248,7 +268,9 @@ const displayController = (() => {
             else if (result?.type === "draw") {
                 updateMessage(`Round ${gameController.getCurrentRound()} is a draw`);
                 nextRoundBtn.style.display = "block";
-            };
+            } else {
+                updateTurn();
+            }
         });
     });
 
@@ -274,22 +296,25 @@ const displayController = (() => {
             render();
             nextRoundBtn.style.display = "none";
 
-            updateMessage(`Round ${gameController.getCurrentRound()}`)
+            updateMessage(`Round ${gameController.getCurrentRound()}`);
+            updateRound();
+            updateTurn();
         } else {
             const winner = gameController.getMatchWinner();
 
             if (winner) {
                 updateMessage(`${winner.name} wins the match!`);
-                turn.textContent = ";"
+                turn.textContent = "Match complete";
             } else {
                 updateMessage("The match is a draw!");
+                turn.textContent = "Match complete";
             };
 
            updateRound();
+           nextRoundBtn.style.display = "none";
         };
     });
     return {
         render
     };
 })();
-

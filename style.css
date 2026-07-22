@@ -90,6 +90,14 @@ h1 {
     text-transform: uppercase;
 }
 
+.setup-card h2,
+.match-card h2 {
+    margin-bottom: 16px;
+    font-size: 1rem;
+}
+
+.setup-card h2 { align-self: center; }
+
 input {
     width: 100%;
     min-height: 45px;
@@ -149,7 +157,12 @@ button { font-family: inherit; }
     align-content: start;
 }
 
-.match-card h2 { grid-column: 1 / -1; }
+.match-card h2 {
+    grid-column: 1 / -1;
+    justify-self: center;
+    margin-bottom: 16px;
+    font-size: 1rem;
+}
 
 .info-block {
     min-width: 0;
